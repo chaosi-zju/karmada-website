@@ -44,22 +44,22 @@ clusters' API servers to create regular Kubernetes resources.
 
 1. Cluster Controller: attaches kubernetes clusters to Karmada for managing the lifecycle of the clusters 
    by creating cluster objects.
-
 2. Policy Controller: watches PropagationPolicy objects. When a PropagationPolicy object is added, the 
    controller selects a group of resources matching the resourceSelector and create ResourceBinding 
    with each single resource object.
-
 3. Binding Controller: watches ResourceBinding objects and create a Work object corresponding to each 
    cluster with a single resource manifest.
-
 4. Execution Controller: watches Work objects. When Work objects are created, the controller will 
    distribute the resources to member clusters.
 
 ### karmada-scheduler
 
-This component is responsible for scheduling k8s native API resource objects (including CRD resources) to member clusters,
-including scheduling strategies and timing. At the same time, it also supports extending scheduling capabilities through plugins.
+This component is responsible for scheduling k8s native API resource objects (including CRD resources) to member clusters.
 
+Factors taken into account for scheduling decisions include: individual and collective resource requirements, hardware/software/policy constraints, 
+affinity and anti-affinity specifications, data locality, inter-workload interference, and deadlines.
+
+At the same time, it also supports extending scheduling capabilities through plugins. 
 For some resource objects that need to calculate the replica ratio, the scheduling plugin will first filter out some clusters,
 and then make a decision on the number of replicas that the resource object should distribute in each cluster.
 
@@ -82,12 +82,12 @@ Besides, the agent also in charge of collecting and reporting current cluster st
 
 ### karmada-scheduler-estimator
 
-This component is responsible for providing the karmada-scheduler with a more precise desired state of the running instances of the
-member cluster. Early karmada-scheduler only supported scheduling the number of replicas based on the total number of cluster resources.
+This component is responsible for providing the karmada-scheduler with a more precise desired state of the running instances of the member cluster. 
+Early karmada-scheduler only supported scheduling the number of replicas based on the total number of cluster resources.
 In this case, scheduling failure occurred when the total cluster resources were sufficient but each node resources were insufficient.
 
-To address this issue, the estimator component was introduced, which calculates the number of callable replicas for each node
-based on resource requests, thereby calculating the true number of schedulable replicas for a cluster.
+To address this issue, the estimator component was introduced, which calculates the number of callable replicas for 
+each node based on resource requests, thereby calculating the true number of schedulable replicas for a cluster.
 
 ### karmada-descheduler
 
