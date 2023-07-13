@@ -40,7 +40,7 @@ enabled such as namespace, garbagecollector, serviceaccount-token controllers.
 This component performs operations based on the API objects you created through the karmada-apiserver
 
 This component runs various controllers, which watch karmada objects and then talk to the underlying
-clusters' API servers to create regular Kubernetes resources.
+clusters' API servers to create regular Kubernetes resources. Some types of these controllers are:
 
 1. Cluster Controller: attaches kubernetes clusters to Karmada for managing the lifecycle of the clusters 
    by creating cluster objects.
