@@ -1,0 +1,11 @@
+# See https://github.com/crate-ci/typos/blob/master/docs/reference.md to configure typos
+[files]
+extend-exclude = [
+    "*generated.pb.go",
+    "*.svg",
+    "*.drawio",
+]
+[default.extend-words]
+BA = "BA"
+Ded = "Ded"
+EDE = "EDE"
