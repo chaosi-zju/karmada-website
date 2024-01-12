@@ -21,4 +21,5 @@ jobs:
       - uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
+      - uses: reviewdog/action-actionlint@v1
 
