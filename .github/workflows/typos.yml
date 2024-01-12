@@ -22,4 +22,6 @@ jobs:
         with:
           reviewdog_version: latest
       - uses: reviewdog/action-actionlint@v1
+  style:
+    uses: knative/actions/.github/workflows/reusable-style.yaml@main
 
