@@ -1,7 +1,29 @@
 name: typos Workflow
 on:
   push:
+  pull_request:
+    branches: [ 'main', 'release-*' ]
 jobs:
   style:
     uses: knative/actions/.github/workflows/reusable-style.yaml@main
+  typos-check:
+    name: Spell Check with Typos
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Actions Repository
+        uses: actions/checkout@v3
+      - name: Check spelling with custom config file
+        uses: crate-ci/typos@v1.16.24
+        with:
+          config: ./typos.toml
+  reviewdog:
+    name: Spell Check with reviewdog
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Actions Repository
+        uses: actions/checkout@v3
+      - uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+      - uses: reviewdog/action-actionlint@v1
 
